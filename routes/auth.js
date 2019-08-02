@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const bcrypt = require('bcryptjs');
 const User = require('../models/User');
-const { registerValidation } = require('../validation');
+const { registerValidation, loginValidation } = require('../validation');
 
 
 
@@ -28,14 +28,29 @@ router.post('/register', async (req, res) => {
   // save user to db
   try {
     const savedUser = await  user.save();
-    res.send({ user: user.id });
+    res.send({ user_id: user.id, message: 'User created successfully.' });
   } catch (error) {
     res.status(400).send(error)
   }
 });
 
-router.post('/login', (req, res) => {
-  res.send('Login');
+router.post('/login', async (req, res) => {
+  // validate
+  const { error } = loginValidation(req.body);
+  if (error) return res.status(400).send(`Error: ${error.details[0].message}`);
+
+  // check if email already exists in db
+  const user = await User.findOne({ email: req.body.email });
+  if (!user) return res.status(400).send('Message: Email or password combination is incorrect.');
+
+  // check if password correct
+  const validPass = await bcrypt.compare(req.body.password, user.password);
+
+  if (!validPass) {
+    return res.status(400).send('Message: Email or password combination is incorrect.');
+  }
+
+  res.send('Successfully logged in!');
 });
 
 module.exports = router;
