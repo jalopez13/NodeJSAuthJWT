@@ -2,7 +2,7 @@
 
 ### Description
 
-NodeJS API built with authentication using JWT tokens.
+NodeJS Users API built with authentication using JWT tokens.
 
 ### Usage
 
