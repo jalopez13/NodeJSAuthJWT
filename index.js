@@ -2,13 +2,14 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const path = require('path');
+const dotenv = require('dotenv').config();
 const PORT = 5000;
 const app = express();
 const authRoute = require('./routes/auth');
+const postsRoute = require('./routes/posts');
 
 // DB Connect
-mongoose.connect('mongodb://localhost:27017/nodejsauthjwt', { useNewUrlParser: true });
+mongoose.connect(`mongodb://${process.env.DB_HOST}/${process.env.DB_NAME}`, { useNewUrlParser: true });
 
 let db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -22,5 +23,6 @@ app.use(cors());
 
 // routes
 app.use('/api/user', authRoute);
+app.use('/api/posts', postsRoute);
 
 app.listen(PORT, () => console.log(`Server listening on port ${PORT}`));
