@@ -4,6 +4,8 @@
 
 NodeJS Users API built with authentication using JWT tokens.
 
+TODO: Add referesh token.
+
 ### Usage
 
 ```
