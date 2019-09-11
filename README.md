@@ -12,6 +12,14 @@ TODO: Add referesh token.
 yarn install
 yarn start
 ```
+
+### Endpoints
+
+```
+/api/user/register : POST
+/api/user/login : POST
+```
+
 ... and enjoy! :)
 
 ### Technologies
