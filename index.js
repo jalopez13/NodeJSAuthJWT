@@ -9,7 +9,7 @@ const authRoute = require('./routes/auth');
 const postsRoute = require('./routes/posts');
 
 // DB Connect
-mongoose.connect(`mongodb://${process.env.DB_HOST}/${process.env.DB_NAME}`, { useNewUrlParser: true });
+mongoose.connect(`mongodb://test:test1234@ds113835.mlab.com:13835/nodejsauthjwt`, { useNewUrlParser: true });
 
 let db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
