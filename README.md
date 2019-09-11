@@ -9,8 +9,7 @@ TODO: Add referesh token.
 ### Usage
 
 ```
-yarn install
-yarn start
+yarn install && yarn start
 ```
 ... and enjoy! :)
 
